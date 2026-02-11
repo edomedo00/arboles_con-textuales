@@ -1,35 +1,35 @@
-let cam1;
-let cam2;
+let cam1; let cam2;
 let isDefaultCamera = true;
 let angle = 0; let angleIncrement = 0.1;
-let font;
+let fontTree; let textTree; let fullTxt_tree;
+let words = [];
+let txtFile = 'poema_octavio_paz.txt'
 
 function preload() {
   // font = loadFont('./assets/IBMPlexSerif-Regular.otf');
-  font = loadFont('./assets/fonts/AncizarSerif-VariableFont_wght.otf');
-
+  fontTree = loadFont('../assets/fonts/AncizarSerif-VariableFont_wght.otf');
+  textTree = loadStrings(`../assets/texts/${txtFile}`);
 }
-
-// function preload() {
-//   let 
-// }
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
+  // frameRate(60);
   angleMode(DEGREES);
 
-  textFont(font);
+  textFont(fontTree);
   textSize(15);
 
-  // noLoop();
+  if (textTree) {
+    fullTxt_tree = textTree.join("\n");        
+    fullTxt_tree = fullTxt_tree.replace(/\\n/g, "\n");
+    words = fullTxt_tree.split(" ");
+  }
 
   fill('rgb(34, 34, 34)');
-  // sphere(1);
 
 
   cam1 = createCamera();
-  // cam1.setPosition(-100, -100, 400);
-  cam1.setPosition(-130, -100, 350, 0, 0, 0);
+  cam1.setPosition(-100, -120, 300, 0, 0, 0);
 
   // Create the second camera.
   // Place it at the top-left.
@@ -41,7 +41,6 @@ function setup() {
 
 function draw() {
   background('rgb(255, 255, 239)');
-  frameRate(60);
 
   rotateY(angle);
   randomSeed(1);
@@ -50,9 +49,6 @@ function draw() {
   text("lorem ipsum", 10, 0);
 
   orbitControl();
-  // textSize(10)
-  // let s = 'The quick brown fox jumps over the lazy dog.';
-  // text(s, 10, 10, 70, 80);
   branch(200, 0);
   angle+=angleIncrement;
 }
@@ -61,7 +57,7 @@ function draw() {
 
 function branch(len, iteration = -1) {
   strokeWeight(map(len, 10, 100, 0.5, 5))
-  stroke(70, 40, 20);
+  stroke(70, 40, 20, 255);
 
   if (iteration === 0) {
     line(0, 0, 0, 0, -len/2, 0);
@@ -88,28 +84,37 @@ function branch(len, iteration = -1) {
     var g = 120 + random(-20, 20);
     var b = 40 + random(-20, 20);
 
-    fill(r, g, b, 200);
+    fill(r, g, b, 255);
     noStroke();
     push();
     translate(5, 0, 0);
     rotateZ(random(60, 120))
 
-    rect(0,0,random(5, 10), random(10, 15))
+    let rectX = random(5, 10);
+    let rectY = random(10, 15);
+    let currWord = random(words);
+
+    // rect(0, 0, rectX, rectY);
+    textSize(8)
+    text(currWord, 0, 0, rectX, rectY)
+
     pop();
-    // beginShape()
-    // for (var i = 45; i < 135; i++) {
-    //   var rad = 7;
-    //   var x = rad * cos(i);
-    //   var y = rad * sin(i);
-    //   vertex(x, y);
-    // }
-    // for (var i = 135; i > 45; i--) {
-    //   var rad = 7;
-    //   var x = rad * cos(i);
-    //   var y = rad * sin(-i + 10);
-    //   vertex(x, y);
-    // }
-    // endShape();
+    /*
+    beginShape()
+    for (var i = 45; i < 135; i++) {
+      var rad = 7;
+      var x = rad * cos(i);
+      var y = rad * sin(i);
+      vertex(x, y);
+    }
+    for (var i = 135; i > 45; i--) {
+      var rad = 7;
+      var x = rad * cos(i);
+      var y = rad * sin(-i + 10);
+      vertex(x, y);
+    }
+    endShape();
+    */
   }
 }
 

@@ -13,15 +13,25 @@ html {
 
 canvas {
   display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .container{
   position: relative;
-}
 
-.txt__sketch {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 10;
+  &__textCanvas canvas{
+   position: absolute;
+   left: 0;
+   top: 0;
+   z-index: 10;
+  }
+
+  // &__treeCanvas canvas {
+  //   position: absolute;
+  //   left: 0;
+  //   top: 0;
+  //   z-index: 0;
+  // }
 }
