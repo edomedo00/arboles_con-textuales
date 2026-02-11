@@ -7,8 +7,8 @@ let txtFile = 'poema_octavio_paz.txt'
 
 function preload() {
   // font = loadFont('./assets/IBMPlexSerif-Regular.otf');
-  fontTree = loadFont('../assets/fonts/AncizarSerif-VariableFont_wght.otf');
-  textTree = loadStrings(`../assets/texts/${txtFile}`);
+  fontTree = loadFont('./assets/fonts/AncizarSerif-VariableFont_wght.otf');
+  textTree = loadStrings(`./assets/texts/${txtFile}`);
 }
 
 function setup() {

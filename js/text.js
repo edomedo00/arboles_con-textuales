@@ -5,8 +5,8 @@ const fontSize = 28;
 const textSketch = p => {
 
   p.preload = () => {
-    fontText = p.loadFont("../assets/fonts/AncizarSerif-VariableFont_wght.otf");
-    txtText = p.loadStrings(`../assets/texts/${txtFile}`);
+    fontText = p.loadFont('./assets/fonts/AncizarSerif-VariableFont_wght.otf');
+    txtText = p.loadStrings(`./assets/texts/${txtFile}`);
   }
 
   p.setup = () => {
